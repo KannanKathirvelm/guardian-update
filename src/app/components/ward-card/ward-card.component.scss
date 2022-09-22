@@ -1,0 +1,91 @@
+.card {
+  height: 268px;
+  width: 312px;
+  margin: 0 auto 16px;
+  border-radius: 5px;
+  background: var(--ward-card-bg-color);
+
+  .card-content {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 0;
+
+    .content-grid {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .content-row {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+
+        &.row-img {
+          .thumbnail-image {
+            margin: auto;
+            width: 120px;
+            height: 120px;
+
+            ion-img {
+              border-radius: 50%;
+            }
+
+            ::ng-deep .avatar-container {
+              .avatar-content {
+                width: 120px;
+                height: 120px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              }
+            }
+          }
+        }
+
+        &.row-sDetail {
+          margin: 15px 0;
+
+          ion-row {
+            text-transform: capitalize;
+            justify-content: center;
+
+            &.student-grade {
+              font-weight: bold;
+              font-size: 14px;
+              color: var(--ward-text-color);
+              margin-top: 4px;
+            }
+
+            &.student-name {
+              color: var(--ward-text-color);
+              font-size: 20px;
+              margin-top: 4px;
+            }
+
+            &.student-school-name {
+              font-size: 13px;
+              color: var(--ward-text-color);
+              margin-top: 4px;
+            }
+
+            &.student-status {
+              ion-text {
+                font-weight: bold;
+              }
+
+              .accept-btn {
+                --background: var(--ward-accept-btn-color);
+                font-size: 12px;
+                font-weight: bold;
+                margin-top: 12px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

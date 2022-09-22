@@ -1,0 +1,53 @@
+<ng-container *ngIf="isPlatformDesktop; else mobileAppTemplate">
+  <ion-grid class="desktop-page desktop-signup-container">
+    <ion-row class="logo-container logo-image-wrapper">
+      <ion-icon class="logo-img fade-in-animate"></ion-icon>
+      <ion-text class="fade-in-animate">{{ 'GUARDIAN_BROWSER_LOGO_TITLE' | translate }}</ion-text>
+    </ion-row>
+    <ion-row class="content-container fade-in-animate">
+      <nav-guardian-description></nav-guardian-description>
+      <ion-grid class="content-wrapper">
+        <ion-row class="header-container">
+          <ion-text class="header-text">
+            {{'SIGN_UP' | translate}}
+          </ion-text>
+        </ion-row>
+        <ion-row class="body-container">
+          <nav-signup-and-request-access></nav-signup-and-request-access>
+        </ion-row>
+      </ion-grid>
+    </ion-row>
+  </ion-grid>
+</ng-container>
+<ng-template #mobileAppTemplate>
+  <ion-header class="header-wrapper" no-border>
+    <ion-toolbar>
+      <ion-grid [ngClass]="{'platform-browser': isPlatformDesktop}">
+        <ion-row class="header-title justify-content-center">
+          <ion-col size="2" class="col-close no-padding justify-content-center" (click)="redirectToLoginPage()">
+            <ion-row class="close-button">
+              <ion-icon ios="md-close" md="md-close"></ion-icon>
+            </ion-row>
+          </ion-col>
+          <ion-col size="10">
+            <ion-grid>
+              <ion-row class="signup-title-text">
+                <ion-text class="sign-up-title-text">
+                  <ng-container *ngIf="isPlatformDesktop; else textTemplate">
+                    {{'SIGN_UP' | translate}}
+                  </ng-container>
+                  <ng-template #textTemplate>
+                    {{'SIGN_UP_REQUEST_ACCESS' | translate}}
+                  </ng-template>
+                </ion-text>
+              </ion-row>
+            </ion-grid>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="signup-container">
+    <nav-signup-and-request-access></nav-signup-and-request-access>
+  </ion-content>
+</ng-template>

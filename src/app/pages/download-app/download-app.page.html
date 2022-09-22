@@ -1,0 +1,30 @@
+<ion-grid class="desktop-page desktop-download-app-container">
+  <ion-row class="logo-container logo-image-wrapper">
+    <ion-icon class="logo-img fade-in-animate"></ion-icon>
+    <ion-text class="fade-in-animate">{{'GUARDIAN_BROWSER_LOGO_TITLE'| translate}}</ion-text>
+  </ion-row>
+  <ion-row class="content-container">
+    <nav-guardian-description></nav-guardian-description>
+    <ion-grid class="content-wrapper fade-in-animate">
+      <ion-row class="body-container">
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-text class="title">Thank You</ion-text>
+            </ion-row>
+            <ion-row class="sub-title-container">
+              <ion-text class="sub-title">
+                {{ message }} {{ 'DOWNLOAD_APP_MSG' | translate }}
+              </ion-text>
+            </ion-row>
+          </ion-grid>
+          <ion-row class="justify-content-center">
+            <ion-button class="download-app-btn" (click)="redirectToDownloadApp()">
+              {{ 'DOWNLOAD_APP'| translate }}
+            </ion-button>
+          </ion-row>
+        </ion-card-content>
+      </ion-row>
+    </ion-grid>
+  </ion-row>
+</ion-grid>

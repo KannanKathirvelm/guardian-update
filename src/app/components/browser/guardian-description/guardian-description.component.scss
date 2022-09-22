@@ -1,0 +1,48 @@
+.guardian-description-container {
+  .guardian-mobile-image-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .description-list-container {
+    .description-list {
+      list-style-type: none;
+      padding: 0;
+
+      .guardian-description-list {
+        .description-container {
+          .icon-container {
+            margin-bottom: 5px;
+
+            .title {
+              font-weight: 400;
+              font-family: var(--montserrat);;
+              font-size: 17px;
+              color: var(--browser-guardian-description-color);
+              display: flex;
+              align-items: center;
+              margin-left: 15px;
+              font-weight: bold;
+            }
+
+            i {
+              color: var(--browser-guardian-description-icon);
+              font-size: 48px;
+            }
+          }
+
+          .body-container {
+            ion-text {
+              font-size: 13px;
+              font-weight: 400;
+              font-family: var(--montserrat);
+              line-height: 26px;
+              color: var(--browser-guardian-description-color);
+              margin-bottom: 15px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

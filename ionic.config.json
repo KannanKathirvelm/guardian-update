@@ -1,0 +1,8 @@
+{
+  "name": "navigator-guardian-mobile",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "deeplinkHost": "guardian-stage.gooru.org"
+}

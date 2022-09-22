@@ -1,0 +1,120 @@
+ion-slide {
+  .intro-slide-content {
+    display: grid;
+    justify-content: center;
+    height: 100%;
+    max-height: 600px;
+
+    .image-container {
+      display: flex;
+      justify-content: center;
+
+      ion-icon {
+        height: 273px;
+        width: 275px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .slider-img-1 {
+        background-image: var(--slider-1);
+      }
+
+      .slider-img-2 {
+        background-image: var(--slider-2);
+      }
+
+      .slider-img-3 {
+        background-image: var(--slider-3);
+      }
+    }
+
+    .text-container {
+      color: var(--dark-400);
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+
+      ion-text {
+        font-family: var(--montserrat);
+        font-size: 20px;
+        text-align: center;
+        color: var(--dark-400);
+      }
+    }
+
+    .button-container {
+      ion-button {
+        height: 44px;
+        width: 100%;
+        --background: var(--dark-blue);
+        --border-radius: 0;
+
+        button {
+          height: 44px;
+        }
+      }
+    }
+  }
+}
+
+ion-content {
+  --background: var(--white);
+  --color: #fff;
+
+  .logo {
+    display: flex;
+
+    .navigator-logo-img {
+      width: 200px;
+      height: 200px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 100%;
+      margin: 60px auto 0;
+    }
+
+    .navigator-logo-img {
+      background-image: var(--navmath-logo);
+    }
+  }
+}
+
+::ng-deep .swiper-container-horizontal {
+  height: calc(100% - 48px);
+
+  & > .swiper-pagination-bullets {
+    bottom: 24px;
+
+    .swiper-pagination-bullet {
+      margin: 0 24px;
+    }
+  }
+}
+
+::ng-deep .swiper-pagination {
+  .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    margin: 0 24px;
+    box-shadow: 0 0 2px 24px rgba(216, 216, 216, 0.5);
+    border: solid 2px var(--blue-400);
+
+    &.swiper-pagination-bullet-active {
+      box-shadow: 0 0 2px 24px rgba(0, 114, 188, 0.1);
+    }
+  }
+}
+
+.skip-container {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+
+  ion-text {
+    color: var(--dark-400);
+    font-family: var(--montserrat);
+    padding: 14px 0;
+  }
+}

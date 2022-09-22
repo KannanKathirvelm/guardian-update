@@ -1,0 +1,8 @@
+{
+  "lineRemoveFiles": [
+      {
+        "filePath": "src/app/shared/shared.module.ts",
+        "keyword": "SessionService"
+      }
+  ]
+}

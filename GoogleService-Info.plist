@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>208698275866-mnmm45uprj76ivfhb8qubf79rpr9kjc0.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.208698275866-mnmm45uprj76ivfhb8qubf79rpr9kjc0</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBzYzyNd4ehvQ0tdaf34xk_sRTL1Ully3s</string>
+	<key>GCM_SENDER_ID</key>
+	<string>208698275866</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.gooru.guardian</string>
+	<key>PROJECT_ID</key>
+	<string>guardian-mobile-dev</string>
+	<key>STORAGE_BUCKET</key>
+	<string>guardian-mobile-dev.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:208698275866:ios:95953713bd7acfbc4479a3</string>
+	<key>DATABASE_URL</key>
+	<string>https://guardian-mobile-dev.firebaseio.com</string>
+</dict>
+</plist>

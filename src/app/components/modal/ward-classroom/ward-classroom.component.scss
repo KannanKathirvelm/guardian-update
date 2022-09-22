@@ -1,0 +1,285 @@
+.modal-container {
+  height: 100%;
+}
+
+ion-header {
+  height: 76px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  border-bottom: 1px solid var(--ward-header-border-color);
+  background-color: var(--classroom-ward-bg);
+
+  &::after {
+    display: none;
+    background-image: none;
+  }
+
+  %vert-horiz-align {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  ion-row {
+    width: 100%;
+  }
+
+  ion-col {
+    padding: 0;
+  }
+
+  .close-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    ion-icon {
+      font-size: 24px;
+    }
+  }
+
+  .ward-detail {
+    padding-left: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .student-name {
+      color: var(--ward-text-color);
+      font-size: 20px;
+      text-transform: capitalize;
+    }
+
+    .school-name {
+      margin-top: 4px;
+      font-size: 13px;
+      text-transform: capitalize;
+      color: var(--ward-text-color);
+    }
+  }
+
+  .thumbnail-image {
+    ion-img {
+      border-radius: 50%;
+    }
+  }
+}
+
+.ward-classroom-content {
+  width: 100%;
+  overflow-y: auto;
+  background-color: var(--classroom-ward-bg);
+  max-height: calc(100% - 76px);
+  display: flex;
+
+  .classlist-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    &.no-class-for-ward {
+      height: 100%;
+    }
+
+    .no-class-message {
+      font-size: 16px;
+      font-style: italic;
+      color: var(--ward-no-class-message-text);
+      justify-content: center;
+      font-weight: bold;
+      height: 160px;
+      align-items: center;
+    }
+
+    .classlist-panel {
+      box-shadow: 0 1px 3px 0 var(--ward-content-box-shadow-color);
+      width: 100%;
+      overflow-y: auto;
+      max-height: 100%;
+
+      .mat-expansion-panel {
+        width: 100%;
+        box-shadow: none;
+        border-radius: 0;
+
+        .mat-expansion-panel-header {
+          padding: 0;
+          pointer-events: none;
+
+          &.mat-expanded {
+            box-shadow: 0 1px 3px 0 var(--ward-content-box-shadow-color);
+            border-radius: 0;
+
+            .student-class {
+              .dropdown-wrapper {
+                .arrow-dropdown {
+                  display: none;
+                }
+
+                .arrow-dropup {
+                  display: block;
+                }
+              }
+            }
+          }
+        }
+
+        ::ng-deep .mat-expansion-panel-body {
+          padding: 0;
+        }
+      }
+
+      .student-class {
+        height: 48px;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 48px auto 48px 48px;
+
+        ion-col {
+          padding: 0;
+        }
+
+        .class-icon {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          ion-icon {
+            width: 24px;
+            height: 24px;
+          }
+        }
+
+        .class-details {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          overflow: hidden;
+          pointer-events: all;
+
+          .class-name {
+            font-size: 16px;
+            color: var(--ward-text-color);
+          }
+
+          .grade-name {
+            font-size: 14px;
+            color: var(--ward-text-color);
+            opacity: 0.7;
+            text-transform: capitalize;
+            margin-top: 4px;
+          }
+        }
+
+        .dropdown-wrapper {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          pointer-events: all;
+
+          .arrow-dropdown {
+            display: block;
+          }
+
+          .arrow-dropup {
+            display: none;
+          }
+
+          ion-icon {
+            font-size: 24px;
+          }
+        }
+
+        .class-performance {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          &.grade-range-not-started {
+            background-color: var(--milestone-no-score);
+            color: var(--ward-text-color);
+          }
+
+          ion-text {
+            font-weight: bold;
+            font-size: 12px;
+          }
+        }
+      }
+
+      ion-list {
+        margin-bottom: 0;
+        margin-top: 2px;
+        padding: 0;
+
+        ion-item {
+          --padding-start: 0;
+          --min-height: 38px;
+
+          ion-label {
+            font-size: 16px;
+            color: var(--ward-text-color);
+            margin: 0;
+
+            &.learning-journey-text {
+              font-size: 18px;
+              line-height: 1.5;
+              font-weight: bold;
+            }
+          }
+
+          &.taught-us {
+            ion-icon {
+              font-size: 24px;
+            }
+
+            ion-label {
+              font-style: italic;
+              width: 100%;
+            }
+          }
+
+          .icon-col {
+            display: flex;
+            color: var(--dark-400);
+            align-items: center;
+            justify-content: center;
+          }
+
+          .label-col {
+            display: flex;
+            align-items: center;
+          }
+
+          .arrow-icon-col {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            font-size: 24px;
+            color: var(--dark-400);
+          }
+        }
+      }
+    }
+    /* skeleton view css */
+    .skeleton-grid {
+      background: var(--coursemap-skeleton-bg-color);
+      padding: 0;
+
+      .skeleton-row {
+        height: 48px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 1px 3px 0 var(--ward-content-box-shadow-color);
+
+        .performance-col {
+          max-width: 48px;
+        }
+      }
+    }
+  }
+}

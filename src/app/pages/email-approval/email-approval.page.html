@@ -1,0 +1,15 @@
+<ion-header class="email-verification-header" no-border *ngIf="!isDesktopView">
+  <ion-toolbar>
+    <ion-row class="justify-content-center header-toolbar">
+      <ion-row class="back-button" *ngIf="!isDesktopView">
+        <ion-back-button defaultHref="login"></ion-back-button>
+      </ion-row>
+      <ion-row class="title-container justify-content-center">
+        <ion-text>{{'EMAIL_APPROVAL' | translate}}</ion-text>
+      </ion-row>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="reset-password-container">
+  <nav-custom-alert *ngIf="showSuccessAlert && !isDesktopView" (dismissAlert)="dismissAlert($event)" [successMessage1]="successMessage"></nav-custom-alert>
+</ion-content>

@@ -1,0 +1,42 @@
+<ion-card class="student card" (click)="openStudentClass(student)">
+  <ion-card-content class="card-content">
+    <ion-grid class="content-grid">
+      <ion-row class="content-row row-img">
+        <ion-thumbnail class="thumbnail-image pull-right" *ngIf="student.thumbnail; else avatarIcon">
+          <ion-img [src]="student.thumbnail"></ion-img>
+        </ion-thumbnail>
+        <ng-template #avatarIcon>
+          <ngx-avatar [name]="student.first_name" class="thumbnail-image" size="120"></ngx-avatar>
+        </ng-template>
+      </ion-row>
+      <ion-row class="content-row row-sDetail">
+        <ion-row>
+          <ion-text class="student-name ellipsis">{{student.last_name}}, {{student.first_name}}</ion-text>
+        </ion-row>
+        <ion-row *ngIf="student.tenantName">
+          <ion-text class="student-name ellipsis">{{student.tenantName}}</ion-text>
+        </ion-row>
+        <ng-container *ngIf="student.status; else showStatusTemplate">
+          <ion-row>
+            <ion-text class="student-school-name ellipsis">{{student.schoolName}}</ion-text>
+          </ion-row>
+          <ion-row class="student-grade">
+            <ion-text *ngIf="student.gradeName">{{student.gradeName}} |</ion-text>
+            <ion-text *ngIf="student.classesCount">&nbsp;{{ student.classesCount}} Class<ng-container *ngIf="student.classesCount > 1">es</ng-container>
+            </ion-text>
+          </ion-row>
+        </ng-container>
+        <ng-template #showStatusTemplate>
+          <ion-row class="student-status" *ngIf="!student.status">
+            <ng-container *ngIf="student.isInvitedByStudent; else showStatusText">
+              <ion-button class="accept-btn" (click)="approveStudentRequest(student.user_id)">{{'ACCEPT' | translate}}</ion-button>
+            </ng-container>
+            <ng-template #showStatusText>
+              <ion-text>{{ 'REQUESTED' | translate }}</ion-text>
+            </ng-template>
+          </ion-row>
+        </ng-template>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>

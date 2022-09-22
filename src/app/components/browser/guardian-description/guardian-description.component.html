@@ -1,0 +1,22 @@
+<ion-grid class="guardian-description-container">
+  <ion-row class="guardian-mobile-image-container">
+    <img class="fade-in-animate" src="assets/images/browser/Gooru-Slides-5-1.png">
+  </ion-row>
+  <ion-row class="description-list-container">
+    <ul class="description-list">
+      <li *ngFor="let gDescription of guardianDescriptionList" class="fade-in-animate">
+        <ion-row class="guardian-description-list">
+          <ion-grid class="description-container">
+            <ion-row class="icon-container">
+              <i class="fas fa-{{gDescription.icon}}"></i>
+              <ion-text class="title">{{gDescription.title}}</ion-text>
+            </ion-row>
+            <ion-row class="body-container">
+              <ion-text>{{gDescription.description}}</ion-text>
+            </ion-row>
+          </ion-grid>
+        </ion-row>
+      </li>
+    </ul>
+  </ion-row>
+</ion-grid>

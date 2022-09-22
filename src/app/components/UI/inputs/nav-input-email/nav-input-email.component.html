@@ -1,0 +1,10 @@
+<div class="input-wrapper">
+  <ion-grid [formGroup]="parentForm">
+    <ion-row class="justify-content-center email-label">
+      <ion-label class="input-label">{{ label }} {{isRequired ? '*' : ''}}</ion-label>
+    </ion-row>
+    <ion-row class="justify-content-center">
+      <ion-input id="email" inputmode="email" class="input-field" (keyup)="onEnterEmail()" [formControlName]="formName" [(ngModel)]="emailId" #email></ion-input>
+    </ion-row>
+  </ion-grid>
+</div>

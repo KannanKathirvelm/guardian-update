@@ -1,0 +1,89 @@
+.class-activity-panel {
+  ion-item {
+    ion-grid {
+      ion-row {
+        &.activity-row-panel {
+          .dca-panel-content {
+            display: none !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+.milestone-container {
+  .milestone-panel {
+    .mat-expansion-panel {
+      .lesson-panel {
+        .lesson-expansion-panel {
+          .collection-panel {
+            pointer-events: none;
+
+            .collection-score {
+              pointer-events: all;
+            }
+
+            .play {
+              display: none !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.coursemap-container {
+  .unit-panel {
+    .mat-expansion-panel {
+      .lesson-panel {
+        .lesson-expansion-panel {
+          &.current-lesson {
+            .mat-expansion-panel-header {
+              .lesson-header {
+                .play {
+                  display: none !important;
+                }
+              }
+            }
+          }
+
+          .collection-panel {
+            pointer-events: none;
+
+            .play {
+              display: none !important;
+            }
+
+            .collection-score {
+              pointer-events: all;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.class-navbar {
+  .navbar-header {
+    .col-tab {
+      &.notification {
+        visibility: hidden;
+      }
+    }
+  }
+}
+
+.items-to-grade-container {
+  .items-to-grade-panel {
+    pointer-events: none;
+  }
+}
+
+.suggestion-panel {
+  ion-item {
+    pointer-events: none;
+  }
+}

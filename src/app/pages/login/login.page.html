@@ -1,0 +1,55 @@
+<ion-content class="login-content-container">
+  <ion-grid class="login-content-grid">
+    <ion-row class="margin-auto">
+      <ion-icon class="logo-img"></ion-icon>
+    </ion-row>
+    <ion-row class="content-wrapper">
+      <ion-icon class="navigator-logo-img"></ion-icon>
+    </ion-row>
+    <ion-row>
+      <form [formGroup]="signInForm" (ngSubmit)="login()" class="login-form" autofill="off">
+        <ion-row class="form-row">
+          <ion-grid class="form-grid">
+            <ion-row class="justify-content-center form-username">
+              <nav-input-email [label]="'ENTER_YOUR_EMAIL_TO_CONTINUE' | translate" [parentForm]="signInForm"></nav-input-email>
+              <ion-text *ngIf="submitted && validateForm.email.errors?.required" class="danger-text text-center">Please enter a email.</ion-text>
+              <ion-text *ngIf="submitted && validateForm.email.errors?.email" class="danger-text text-center">Please enter a valid email.</ion-text>
+            </ion-row>
+            <ion-row class="justify-content-center form-password">
+              <nav-input-password [label]="'PASSWORD' | translate" [formName]="'password'" [parentForm]="signInForm"></nav-input-password>
+              <ion-text *ngIf="submitted && validateForm.password.errors" class="danger-text text-center">
+                {{'ENTER_YOUR_TEXT' | translate}} {{'PASSWORD'| translate}}.
+              </ion-text>
+            </ion-row>
+            <ion-row class="justify-content-center">
+              <ion-text class="forgot-pwd-text" (click)="forgotPassword()">{{ 'FORGOT_YOUR_PASSWORD' | translate }}</ion-text>
+            </ion-row>
+          </ion-grid>
+        </ion-row>
+        <ion-row>
+          <ion-button class="submit-btn" type="submit">{{ 'SUBMIT' | translate }}</ion-button>
+        </ion-row>
+
+        <ion-row>
+          <!-- currently, we are hiding the google signin and apple signin button (reference ticket: https://gooru.atlassian.net/browse/NILEMOBILE-506) -->
+          <ion-button class="login-submit-btn google-signin-btn ion-no-padding" (click)="doGoogleLogin()">
+            <ion-col size="3" class="google-icon-container ion-no-padding">
+              <ion-icon class="icon google-icon"></ion-icon>
+            </ion-col>
+            <ion-col size="9" class="google-signin-text ion-no-padding">{{ 'SIGN_IN_WITH_GOOGLE' | translate }}</ion-col>
+          </ion-button>
+          <ion-button class="login-submit-btn apple-signin-btn ion-no-padding" *ngIf="isIosDevice" (click)="doAppleLogin()">
+            <ion-col size="3" class="apple-icon-container ion-no-padding">
+              <ion-icon class="icon apple-icon"></ion-icon>
+            </ion-col>
+            <ion-col size="9" class="apple-signin-text ion-no-padding">{{ 'SIGN_IN_WITH_APPLE' | translate }}</ion-col>
+          </ion-button>
+        </ion-row>
+
+        <ion-row class="justify-content-center" (click)="onClickSignUp()">
+          <ion-text class="signup-link">{{'SIGN_UP_REQUEST_ACCESS' | translate}}</ion-text>
+        </ion-row>
+      </form>
+    </ion-row>
+  </ion-grid>
+</ion-content>

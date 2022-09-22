@@ -1,0 +1,100 @@
+<ion-header class="guardian-home-header">
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="2">
+          <ion-buttons>
+            <ion-menu-button autoHide="false"></ion-menu-button>
+          </ion-buttons>
+        </ion-col>
+        <ng-container *ngIf="!isShowSearchBar">
+          <ion-col size="8">
+            <ion-title>{{'YOUR_STUDENTS' | translate}}</ion-title>
+          </ion-col>
+          <ion-col class="actions" size="2" (click)="toggleSearchBar()">
+            <i class="material-icons">search</i>
+          </ion-col>
+        </ng-container>
+        <ng-container *ngIf="isShowSearchBar">
+          <ion-col size="8">
+            <ion-input placeholder="Search" class="classroom-searchbar" (ionInput)="filterClassList($event)" searchIcon="false" clearIcon="false"></ion-input>
+          </ion-col>
+          <ion-col class="actions" size="2">
+            <i class="close material-icons" (click)="toggleSearchBar()">close</i>
+          </ion-col>
+        </ng-container>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="student-list-container" [ngClass]="{'ward-opened': showClassroomWard}">
+  <ion-row class="class-room-ward-pullup" [ngClass]="[showClassroomWard ? 'active':'in-active', classLoaded ? 'ward-loaded': '']" #wardClassRoomRef>
+    <nav-ward-classroom [ward]="ward" [showClassroomWard]="showClassroomWard" (closeWardPullUp)="closeWardPullUp()" (isWardClassroomLoaded)="wardClassroomLoaded($event)">
+    </nav-ward-classroom>
+  </ion-row>
+  <ion-row class="backdrop" (click)="closeWardPullUp()" *ngIf="showClassroomWard">
+  </ion-row>
+  <ion-row class="student-list" *ngIf="isLoaded; else studentSkeletonView">
+    <ng-container *ngIf="wardList && wardList.length; else noWardTemplate">
+      <ng-container *ngFor="let student of wardList | listFilter: searchText: 'first_name' | sort: 'first_name' ">
+        <nav-ward-card [student]="student" (openWardClassDetail)="impersonateWardClass($event)" (approveStudentRequestEvent)="approveStudentRequest($event)"></nav-ward-card>
+      </ng-container>
+    </ng-container>
+    <ion-card class="student card" (click)="requestAccess()">
+      <ion-card-content class="card-content">
+        <ion-grid class="content-grid">
+          <ion-row class="content-row row-img">
+            <ion-thumbnail class="thumbnail-image pull-right">
+              <ion-icon name="add-circle-outline" class="add-ward-icon"></ion-icon>
+            </ion-thumbnail>
+          </ion-row>
+          <ion-row class="content-row row-sDetail">
+            <ion-text>{{ 'ADD_A_STUDENT'| translate }}</ion-text>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+    <ng-template #noWardTemplate>
+      <ion-row class="student-list skeleton no-ward">
+        <ion-card class="student card">
+          <ion-card-content class="card-content">
+            <ion-grid class="content-grid">
+              <ion-row class="content-row row-img">
+                <ion-thumbnail class="thumbnail-image pull-right">
+                </ion-thumbnail>
+              </ion-row>
+              <ion-row class="content-row row-sDetail">
+                <ion-text>{{'NO_STUDENTS_TO_DISPLAY_HEADER' | translate}}</ion-text>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-row>
+      <ion-row class="student-no-ward-text">
+        <ion-text>{{'NO_STUDENTS_TO_DISPLAY_DESC_1' | translate}}</ion-text>
+        <ion-text>{{'NO_STUDENTS_TO_DISPLAY_DESC_2' | translate}}</ion-text>
+      </ion-row>
+    </ng-template>
+  </ion-row>
+  <ng-template #studentSkeletonView>
+    <ion-row class="student-list skeleton">
+      <ion-card class="student card" *ngFor="let item of [].constructor(3)">
+        <ion-card-content class="card-content">
+          <ion-grid class="content-grid">
+            <ion-row class="content-row row-img">
+              <ion-thumbnail class="thumbnail-image pull-right">
+                <ion-skeleton-text animated></ion-skeleton-text>
+              </ion-thumbnail>
+            </ion-row>
+            <ion-row class="content-row row-sDetail">
+              <ion-skeleton-text animated></ion-skeleton-text>
+              <ion-skeleton-text animated></ion-skeleton-text>
+              <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ion-row>
+  </ng-template>
+  <nav-custom-alert *ngIf="showSuccessAlert" (dismissAlert)="dismissAlert($event)" [successMessage1]="successMessage"></nav-custom-alert>
+</ion-content>

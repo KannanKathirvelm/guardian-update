@@ -1,0 +1,72 @@
+<ng-container *ngIf="isDesktopView; else mobileAppTemplate">
+  <ion-grid class="desktop-page desktop-email-verify-container">
+    <ion-row class="logo-container logo-image-wrapper">
+      <ion-icon class="logo-img fade-in-animate"></ion-icon>
+      <ion-text class="fade-in-animate">{{'GUARDIAN_BROWSER_LOGO_TITLE'| translate}}</ion-text>
+    </ion-row>
+    <ion-row class="content-container">
+      <nav-guardian-description></nav-guardian-description>
+      <ion-grid class="content-wrapper fade-in-animate">
+        <ng-container *ngIf="showResendEmailForm">
+          <ion-row class="header-container">
+            <ion-text class="header-text">
+              {{'RESEND_INVITATION' | translate}}
+            </ion-text>
+          </ion-row>
+          <ion-row class="body-container">
+            <ng-container *ngTemplateOutlet="resendInvitationTemplate"></ng-container>
+          </ion-row>
+        </ng-container>
+      </ion-grid>
+    </ion-row>
+  </ion-grid>
+</ng-container>
+<ng-template #mobileAppTemplate>
+  <ion-header class="email-verification-header" no-border *ngIf="!isDesktopView">
+    <ion-toolbar>
+      <ion-row class="justify-content-center header-toolbar">
+        <ion-row class="back-button" *ngIf="!isDesktopView">
+          <ion-back-button defaultHref="login"></ion-back-button>
+        </ion-row>
+        <ion-row class="title-container justify-content-center">
+          <ion-text>{{'EMAIL_VERIFICATION' | translate}}</ion-text>
+        </ion-row>
+      </ion-row>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="email-verification-container">
+    <ion-grid *ngIf="isLoaded" class="container-grid">
+      <ion-row>
+        <ion-icon class="navigator-logo-img"></ion-icon>
+      </ion-row>
+      <ion-row *ngIf="showResendEmailForm">
+        <ion-text class="message">{{message}}</ion-text>
+        <ng-container *ngTemplateOutlet="resendInvitationTemplate"></ng-container>
+      </ion-row>
+      <ion-row class="account-verified-container" *ngIf="isEmailverified">
+        <ion-text>{{ 'ACCOUNT_VERIFIED_MSG' | translate }}</ion-text>
+        <ion-button class="submit-btn" (click)="redirectToLogin()">{{'LOGIN' | translate}}</ion-button>
+      </ion-row>
+    </ion-grid>
+    <nav-custom-alert *ngIf="showSuccessAlert && !isDesktopView" (dismissAlert)="dismissAlert($event)" [successMessage1]="successMessage"></nav-custom-alert>
+  </ion-content>
+</ng-template>
+<!-- template for resend form-->
+<ng-template #resendInvitationTemplate>
+  <form [formGroup]="resendEmailForm" (ngSubmit)="resendEmail()" class="resend-email-form" autofill="off">
+    <ion-row class="justify-content-center email">
+      <ion-col align-self-start size="10" class="text-align-center">
+        <nav-input-email [label]="'RESEND_EMAIL_ADDRESS' | translate" [parentForm]="resendEmailForm" [isRequired]="true"></nav-input-email>
+        <ion-text *ngIf="submitted && validateForm.email.errors?.required" class="danger-text text-center">
+          {{'ENTER_YOUR_TEXT' | translate}} {{'EMAIL' | translate}}.
+        </ion-text>
+        <ion-text *ngIf="isEmailNotFound" class="danger-text">
+          {{ 'GUARDIAN_NOT_FOUND_MSG' | translate }}
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row class="justify-content-center">
+      <ion-button class="submit-btn" type="submit">{{ 'RESEND_INVITATION' | translate }}</ion-button>
+    </ion-row>
+  </form>
+</ng-template>

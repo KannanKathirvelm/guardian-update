@@ -1,0 +1,48 @@
+<ion-content fullscreen class="ion-padding" scroll-y="false">
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide>
+      <ion-grid class="intro-slide-content">
+        <ion-row class="image-container">
+          <ion-icon class="slider-img-1"></ion-icon>
+        </ion-row>
+        <ion-row class="text-container">
+          <ion-text>{{ 'INTRO_SLIDER_1_TEXT' | translate }}</ion-text>
+        </ion-row>
+        <ion-row class="button-container">
+          <ion-button (click)="redirectToSignup()">{{ 'SIGN_UP_REQUEST_ACCESS' | translate }}</ion-button>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+    <ion-slide>
+      <ion-grid class="intro-slide-content">
+        <ion-row class="image-container">
+          <ion-icon class="slider-img-2"></ion-icon>
+        </ion-row>
+        <ion-row class="text-container">
+          <ion-text>{{ 'INTRO_SLIDER_2_TEXT' | translate }}</ion-text>
+        </ion-row>
+        <ion-row class="button-container">
+          <ion-button (click)="redirectToNavigatorApp()">{{ 'GET_NAVIGATOR' | translate }}</ion-button>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+    <ion-slide>
+      <ion-grid class="intro-slide-content">
+        <ion-row class="image-container">
+          <ion-icon class="slider-img-3"></ion-icon>
+        </ion-row>
+        <ion-row class="text-container">
+          <ion-text>{{ 'INTRO_SLIDER_3_TEXT_1' | translate }}</ion-text>
+          <ion-text>{{ 'INTRO_SLIDER_3_TEXT_2' | translate }}</ion-text>
+        </ion-row>
+        <ion-row class="button-container">
+          <ion-button (click)="redirectToLogin()">{{ 'SIGN_IN' | translate }}</ion-button>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+  </ion-slides>
+  <ion-row class="skip-container">
+    <ion-text (click)="finish()"> {{ 'SKIP_AND_CONTINUE' | translate }} </ion-text>
+  </ion-row>
+  <nav-custom-alert *ngIf="showSuccessAlert" (dismissAlert)="dismissAlert($event)" [successMessage1]="successMessage"></nav-custom-alert>
+</ion-content>

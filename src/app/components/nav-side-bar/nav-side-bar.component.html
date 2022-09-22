@@ -1,0 +1,100 @@
+<ng-container *ngIf="userSession">
+  <ion-header class="menu-drawer-header">
+    <ion-toolbar>
+      <ion-row class="item-header">
+        <ion-col size="4" class="profile" *ngIf="!showNgxAvatar; else avatarIcon">
+          <img [src]="userSession.thumbnail" class="profile-icon" (error)="imageErrorHandler()">
+        </ion-col>
+        <ng-template #avatarIcon>
+          <ion-col size="4" class="avatar-icon no-padding">
+            <ngx-avatar [name]="userSession.firstname || userSession.email" [round]="false" [size]="80" bgColor="#0072bc"></ngx-avatar>
+          </ion-col>
+        </ng-template>
+        <ion-col size="8" class="user-info">
+          <ion-text class="username">{{userSession.lastname}}, {{userSession.firstname}}</ion-text>
+          <ion-text class="email ellipsis">{{userSession.email}}</ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="menu-drawer-content">
+    <mat-accordion class="wardList-container">
+      <ion-row class="wardList-panel" *ngIf="wardList && wardList.length">
+        <mat-expansion-panel [hideToggle]="true" *ngFor="let student of wardList; let studentIndex=index" [expanded]="student.isImpersonate">
+          <mat-expansion-panel-header class="no-padding student-list" collapsedHeight="64px" expandedHeight="64px">
+            <ion-row class="student">
+              <ion-col class="class-icon">
+                <ion-thumbnail class="thumbnail-image pull-right" *ngIf="student.thumbnail; else avatarIcon">
+                  <ion-img [src]="student.thumbnail"></ion-img>
+                </ion-thumbnail>
+                <ng-template #avatarIcon>
+                  <ngx-avatar [name]="student.first_name" class="thumbnail-image" size="40"></ngx-avatar>
+                </ng-template>
+              </ion-col>
+              <ion-col class="student-details">
+                <ion-text class="student-name"><ng-container *ngIf="student.last_name">{{ student.last_name }},</ng-container> {{ student.first_name }} <ng-container *ngIf="student.tenantName">({{student.tenantName}})</ng-container></ion-text>
+              </ion-col>
+              <ion-col class="dropdown-wrapper">
+                <ion-icon ios="md-arrow-dropdown" md="md-arrow-dropdown" class="arrow-dropdown"></ion-icon>
+                <ion-icon ios="md-arrow-dropup" md="md-arrow-dropup" class="arrow-dropup"></ion-icon>
+              </ion-col>
+            </ion-row>
+          </mat-expansion-panel-header>
+          <ng-template matExpansionPanelContent>
+            <ion-list class="body-list">
+              <ion-item class="taught-us" (click)="redirectToStudentProficiency(student)">
+                <ion-icon class="nav-proficiency"></ion-icon>
+                <ion-label>Proficiency</ion-label>
+              </ion-item>
+              <ion-item (click)="redirectToStudentPortfolio(student)">
+                <ion-icon class="nav-resource-icon"></ion-icon>
+                <ion-label>Portfolio</ion-label>
+              </ion-item>
+            </ion-list>
+          </ng-template>
+        </mat-expansion-panel>
+      </ion-row>
+    </mat-accordion>
+  </ion-content>
+  <ion-footer class="menu-drawer-footer" no-border>
+    <ion-row class="row-item app-version text-center">
+      <ion-col size="12">
+        <ion-text>V {{appVersion}}</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row class="app-menus">
+      <ion-grid class="menus-list no-padding">
+        <ion-row class="menu journey" (click)="closeMenu()" routerLink="/guardian-home">
+          <ion-col size="2" class="icon-wrapper">
+            <ion-text class="material-icons">home</ion-text>
+          </ion-col>
+          <ion-col size="10">
+            <ion-text class="label">{{'YOUR_STUDENTS' | translate}}</ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-row>
+    <ion-row class="app-preference">
+      <ion-grid class="menus-list no-padding">
+        <ion-row class="menu language">
+          <ion-col size="2" class="icon-wrapper">
+            <ion-icon class="label nav-language"></ion-icon>
+          </ion-col>
+          <ion-col size="10">
+            <ion-select [value]="defaultLanguage" (ionChange)="changeLanguage($event)" dropdownScrollIntoView>
+              <ion-select-option [value]="language.value" *ngFor="let language of languageList">{{language.label}}</ion-select-option>
+            </ion-select>
+          </ion-col>
+        </ion-row>
+        <ion-row class="menu logout" (click)="onLogout()">
+          <ion-col size="2" class="icon-wrapper">
+            <ion-icon class="nav-logout"></ion-icon>
+          </ion-col>
+          <ion-col size="10">
+            <ion-text class="label">{{'LOGOUT' | translate}}</ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-row>
+  </ion-footer>
+</ng-container>

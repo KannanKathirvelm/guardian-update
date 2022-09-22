@@ -1,0 +1,221 @@
+.guardian-home-header {
+  &::after {
+    background-image: none;
+  }
+
+  ion-toolbar {
+    --min-height: var(--toolbar-height);
+    --background: var(--ward-header-bg-color);
+
+    ion-grid {
+      height: 48px;
+
+      ion-row {
+        height: 100%;
+
+        .actions {
+          display: flex;
+          justify-content: center;
+          height: 44px;
+        }
+
+        ion-col {
+          height: 100%;
+          display: flex;
+
+          .classroom-searchbar {
+            --padding-start: 0;
+            --placeholder-color: var(--ward-search-bar-text-color);
+            --placeholder-font-weight: bold;
+            color: var(--ward-search-bar-text-color);
+          }
+
+          ion-buttons {
+            height: 100%;
+
+            ion-menu-button {
+              color: var(--ward-search-bar-text-color);
+            }
+          }
+
+          i {
+            color: var(--ward-search-bar-text-color);
+            display: flex;
+            height: 44px;
+            width: 44px;
+            justify-content: center;
+          }
+
+          ion-searchbar {
+            height: 100%;
+            padding: 0;
+            --background: transparent;
+            --placeholder-font-weight: 700;
+          }
+        }
+      }
+    }
+
+    ion-title {
+      padding: 0;
+      font-size: 15px;
+      font-weight: bold;
+      color: var(--ward-search-bar-text-color);
+      margin: auto;
+      text-align: left;
+      text-transform: capitalize;
+    }
+  }
+}
+
+.class-room-ward-pullup {
+  opacity: 1;
+  position: fixed;
+  width: 100%;
+  z-index: 13;
+  right: 0;
+  left: 0;
+  margin: auto;
+  top: 100%;
+  height: calc(100% - 48px);
+  align-items: flex-end;
+  transition: 1s;
+
+  &.ward-loaded {
+    nav-ward-classroom {
+      height: 100%;
+    }
+  }
+
+  nav-ward-classroom {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+    height: 220px;
+    transition: 2s;
+  }
+
+  &.active {
+    display: flex;
+    opacity: 1;
+    top: 48px;
+  }
+}
+
+.student-list-container {
+  --background: var(--ward-list-container-bg-color);
+  padding-top: 31px;
+  padding-bottom: 31px;
+  overflow: auto;
+  height: 100%;
+  display: block;
+  flex-direction: column;
+  align-items: center;
+
+  &.ward-opened {
+    --overflow: hidden;
+  }
+
+  .backdrop {
+    top: 48px;
+  }
+
+  .student-list {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+
+    &.no-ward {
+      .row-sDetail {
+        margin: 30px 0;
+      }
+
+      .thumbnail-image {
+        background: var(--ward-no-list-card-ng-color);
+        border-radius: 50%;
+        opacity: 0.2;
+      }
+    }
+
+    .student {
+      background: var(--ward-card-bg-color);
+
+      &.card {
+        height: 268px;
+        width: 312px;
+        margin: 0 auto 16px;
+        border-radius: 5px;
+        background: var(--ward-card-bg-color);
+
+        .card-content {
+          height: 100%;
+          padding-top: 24px;
+          padding-bottom: 24px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .content-grid {
+            display: grid;
+
+            .content-row {
+              display: grid;
+              justify-content: center;
+              text-align: center;
+              align-items: center;
+
+              &.row-img {
+                .thumbnail-image {
+                  margin: auto;
+                  width: 120px;
+                  height: 120px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+
+                  .add-ward-icon {
+                    font-size: 100px;
+                  }
+
+                  ion-img {
+                    border-radius: 50%;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &.skeleton {
+      ion-thumbnail {
+        ion-skeleton-text {
+          border-radius: 50%;
+        }
+      }
+
+      .content-row {
+        &.row-sDetail {
+          ion-skeleton-text {
+            width: 200px;
+          }
+        }
+      }
+    }
+  }
+
+  .student-no-ward-text {
+    color: var(--ward-no-list-card-text-color);
+    padding: 15px;
+    text-align: center;
+    font-size: 17px;
+
+    ion-text {
+      margin: 5px 0;
+    }
+  }
+}

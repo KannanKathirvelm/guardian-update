@@ -1,0 +1,108 @@
+/* !important is used to overwrite their child component css  */
+.guardian-form {
+  .guardian-details-header {
+    ion-col {
+      display: flex;
+      justify-content: center;
+
+      ion-text {
+        font-weight: 300;
+        font-size: 14px;
+        line-height: normal;
+        text-align: center;
+        color: var(--guardian-signup-header-text);
+        font-family: var(--montserrat);
+        margin: 10px 0;
+      }
+    }
+  }
+
+  .email-msg-label {
+    font-size: 11px;
+    color: var(--input-label);
+    opacity: 0.7;
+    display: block;
+    padding-left: 5px;
+    font-family: var(--montserrat);
+  }
+
+  ::ng-deep .input-wrapper {
+    .email-label,
+    .username-label,
+    ion-row {
+      justify-content: flex-start !important;
+
+      ion-input {
+        &.has-value {
+          border-color: var(--guardian-input-border-color);
+        }
+      }
+
+      .input-label {
+        color: var(--guardian-input-label-color);
+        font-family: var(--montserrat);
+        font-size: 11px;
+        font-weight: 600;
+
+        &:not(.select-label) {
+          margin-left: 9px;
+        }
+      }
+    }
+
+    .input-field {
+      text-align: left !important;
+      --padding-start: 0;
+    }
+  }
+
+  .submit-btn {
+    --background: var(--signin-btn-bg-color);
+    --background-focused: var(--signin-btn-bg-color);
+    --background-hover: var(--signin-btn-bg-color);
+    --border-radius: 0;
+    margin-top: 20px;
+    color: var(--white);
+    width: 340px;
+    height: 48px;
+    text-transform: capitalize;
+    font-weight: 300;
+    letter-spacing: 0;
+    margin-bottom: 15px;
+    font-size: 14px;
+
+    &.platform-button {
+      --background: var(--browser-btn-color);
+      --background-focused: var(--browser-btn-color);
+      --background-hover: var(--browser-btn-color);
+    }
+  }
+
+  .role-list-row {
+    padding: 15px 0;
+
+    .role-label {
+      font-weight: 600;
+      font-size: 13px;
+      line-height: normal;
+      letter-spacing: normal;
+      color: var(--input-label);
+      display: flex;
+      align-items: center;
+    }
+
+    ion-select {
+      color: var(--guardian-select-color);
+      display: flex;
+      align-items: center;
+      text-transform: capitalize;
+      font-family: var(--montserrat);
+      font-size: 14px;
+      height: 44px;
+      --padding-bottom: 0;
+      --padding-start: 0;
+      --padding-end: 0;
+      --padding-top: 0;
+    }
+  }
+}

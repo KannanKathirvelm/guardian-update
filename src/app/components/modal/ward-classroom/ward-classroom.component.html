@@ -1,0 +1,148 @@
+<ion-header>
+  <ion-row *ngIf="studentDetail">
+    <ion-col size="10">
+      <ion-row>
+        <ion-col size="2">
+          <ion-thumbnail class="thumbnail-image pull-right" *ngIf="studentDetail.thumbnail; else ngxAvatar">
+            <ion-img [src]="studentDetail.thumbnail"></ion-img>
+          </ion-thumbnail>
+          <ng-template #ngxAvatar>
+            <ngx-avatar [name]="studentDetail.first_name" [size]="48"></ngx-avatar>
+          </ng-template>
+        </ion-col>
+        <ion-col size="10" class="ward-detail">
+          <ion-text class="student-name">{{studentDetail.last_name}}, {{studentDetail.first_name}}</ion-text>
+          <ion-text class="school-name">{{studentDetail.schoolName}}</ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="2" class="close-icon">
+      <ion-icon ios="md-close" md="md-close" color="dark" (click)="closeModal()"></ion-icon>
+    </ion-col>
+  </ion-row>
+</ion-header>
+<ion-row class="ward-classroom-content">
+  <mat-accordion class="classlist-container" [ngClass]="{'no-class-for-ward': isLoaded && classList && !classList.length}">
+    <ng-container *ngIf="isLoaded; else skeletonViewTemplate">
+      <ng-container *ngIf="classList && classList.length; else NoClassessMessage">
+        <ion-row class="classlist-panel">
+          <mat-expansion-panel [hideToggle]="true" (opened)="openWardClass(class)" *ngFor="let class of classList;let classIndex=index" [expanded]="classIndex === 0">
+            <mat-expansion-panel-header class="no-padding class-list" collapsedHeight="48px" expandedHeight="inherit">
+              <ion-row class="student-class">
+                <ion-col class="class-icon">
+                  <ion-icon class="nav-journey"></ion-icon>
+                </ion-col>
+                <ion-col class="class-details" (click)="redirectToCourseMilestone(class)">
+                  <ion-text class="class-name ellipsis"> {{ class.title }}</ion-text>
+                  <ion-text class="grade-name ellipsis" *ngIf="class.preference && class.preference.framework">{{class.preference.framework}}</ion-text>
+                </ion-col>
+                <ion-col class="dropdown-wrapper">
+                  <ion-icon ios="md-arrow-dropdown" md="md-arrow-dropdown" class="arrow-dropdown"></ion-icon>
+                  <ion-icon ios="md-arrow-dropup" md="md-arrow-dropup" class="arrow-dropup"></ion-icon>
+                </ion-col>
+                <ion-col class="class-performance grade-range-{{class.performanceSummary.scoreInPercentage | gradeRange}}" *ngIf="class.performanceSummary; else noPerformance">
+                  {{ class.performanceSummary.scoreInPercentage | transformPerformanceScore }}
+                </ion-col>
+                <ng-template #noPerformance>
+                  <ion-col class="class-performance no-performance-score grade-range-not-started">
+                    <ion-text>&mdash;</ion-text>
+                  </ion-col>
+                </ng-template>
+              </ion-row>
+            </mat-expansion-panel-header>
+            <ng-template matExpansionPanelContent>
+              <ion-list class="body-list">
+                <ion-item class="taught-us">
+                  <ion-col class="ion-no-padding icon-col" size="2">
+                    <ion-icon name="book"></ion-icon>
+                  </ion-col>
+                  <ion-col class="ion-no-padding label-col" size="10">
+                    <ion-label>
+                      {{'TAUGHT_BY' | translate}}
+                      <ion-text *ngIf="class.teacher">{{ class.teacher.last_name }}, {{ class.teacher.first_name }}</ion-text>
+                    </ion-label>
+                  </ion-col>
+                </ion-item>
+                <ion-item (click)="redirectToLearningJourney(class.id)">
+                  <ion-col class="ion-no-padding icon-col" size="2">
+                    <ion-text class="material-icons">sort</ion-text>
+                  </ion-col>
+                  <ion-col class="ion-no-padding label-col" size="8">
+                    <ion-label class="learning-journey-text">{{ 'LEARNING_JOURNEY' | translate }}</ion-label>
+                  </ion-col>
+                  <ion-col class="arrow-icon-col ion-no-padding" size="2">
+                    <ion-icon name="arrow-forward"></ion-icon>
+                  </ion-col>
+                </ion-item>
+                <ion-item (click)="redirectToProficiency(class)">
+                  <ion-col class="ion-no-padding icon-col" size="2">
+                    <ion-icon class="nav-proficiency"></ion-icon>
+                  </ion-col>
+                  <ion-col class="ion-no-padding label-col" size="8">
+                    <ion-label>
+                      <ion-text *ngIf="class.competencyStats; else initialValueTemplate">
+                        {{class.competencyStats.completedCompetencies | transformCompentencyStats:class.competencyStats.totalCompetencies}}
+                      </ion-text>
+                      {{ 'COMPETENCIES_GAINED' | translate }}
+                    </ion-label>
+                  </ion-col>
+                  <ion-col class="arrow-icon-col ion-no-padding" size="2">
+                    <ion-icon name="arrow-forward"></ion-icon>
+                  </ion-col>
+                </ion-item>
+                <ion-item *ngIf="!class.isPublic" (click)="redirectToClassActivity(class.id)">
+                  <ion-col class="ion-no-padding icon-col" size="2">
+                    <ion-icon class="nav-class-activity"></ion-icon>
+                  </ion-col>
+                  <ion-col class="ion-no-padding label-col" size="8">
+                    <ion-label>
+                      <ion-text *ngIf="class.classActivityCount; else initialValueTemplate">{{class.classActivityCount.currentWeekCount}}</ion-text>
+                      {{ 'ASSIGNMENTS_CURRENT_WEEK' | translate : { assignmentText: class.classActivityCount && class.classActivityCount.currentWeekCount > 1 ? 'Assignments': 'Assignment'  } }}
+                    </ion-label>
+                  </ion-col>
+                  <ion-col class="arrow-icon-col ion-no-padding" size="2">
+                    <ion-icon name="arrow-forward"></ion-icon>
+                  </ion-col>
+                </ion-item>
+                <ion-item *ngIf="!class.isPublic" (click)="redirectToNextWeekClassActivity(class.id)">
+                  <ion-col class="ion-no-padding icon-col" size="2">
+                    <ion-icon class="nav-class-activity"></ion-icon>
+                  </ion-col>
+                  <ion-col class="ion-no-padding label-col" size="8">
+                    <ion-label>
+                      <ion-text *ngIf="class.classActivityCount; else initialValueTemplate">{{class.classActivityCount.nextWeekCount}}</ion-text>
+                      {{ 'ASSIGNMENTS_NEXT_WEEK' | translate : { assignmentText: class.classActivityCount && class.classActivityCount.nextWeekCount > 1 ? 'Assignments': 'Assignment'  } }}
+                    </ion-label>
+                  </ion-col>
+                  <ion-col class="arrow-icon-col ion-no-padding" size="2">
+                    <ion-icon name="arrow-forward"></ion-icon>
+                  </ion-col>
+                </ion-item>
+              </ion-list>
+              <ng-template #initialValueTemplate>
+                <ion-text>0</ion-text>
+              </ng-template>
+            </ng-template>
+          </mat-expansion-panel>
+        </ion-row>
+      </ng-container>
+      <ng-template #NoClassessMessage>
+        <ion-row class="no-class-message">
+          <ion-text>{{ 'WARD_NOT_JOINED_CLASS' | translate }}</ion-text>
+        </ion-row>
+      </ng-template>
+    </ng-container>
+    <ng-template #skeletonViewTemplate>
+      <ion-grid class="skeleton-grid">
+        <ion-row class="skeleton-row" *ngFor="let items of [].constructor(3)">
+          <ion-col class="title-col">
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-col>
+          <ion-col class="performance-col">
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ng-template>
+  </mat-accordion>
+</ion-row>

@@ -1,0 +1,106 @@
+.browser-success-popup {
+  width: 400px;
+}
+
+.content-row {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: inherit;
+}
+
+.desktop-download-app-container {
+  width: 100%;
+  max-width: 1200px;
+
+  .logo-container {
+    flex-direction: inherit;
+
+    &.logo-image-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+
+      .logo-img {
+        width: 110px;
+        height: 110px;
+        background-image: var(--nav-guardian-logo);
+        background-position: center;
+        background-size: 100%;
+        background-repeat: no-repeat;
+      }
+
+      ion-text {
+        color: var(--browser-logo-title-color);
+        font-family: var(--montserrat);
+        margin-top: 5px;
+        font-weight: bold;
+        font-size: 28px;
+        text-align: center;
+      }
+    }
+  }
+
+  .content-container {
+    width: 100%;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-column-gap: 20px;
+
+    .content-wrapper {
+      width: calc(100% - 85px);
+
+      .body-container {
+        background: var(--browser-right-container-bg);
+
+        ion-card-content {
+          padding: 0;
+          width: 100%;
+
+          ion-grid {
+            margin: 34px 0;
+          }
+
+          .download-app-btn {
+            margin: 0;
+            width: 250px;
+            font-family: var(--montserrat);
+            margin-bottom: 25px;
+            --background: var(--browser-btn-color);
+            --background-focused: var(--browser-btn-color);
+            --background-hover: var(--browser-btn-color);
+          }
+        }
+
+        .title {
+          font-size: 34px;
+          width: 100%;
+          text-align: center;
+          font-family: var(--montserrat);
+        }
+
+        .sub-title-container {
+          margin-top: 20px;
+
+          .sub-title {
+            text-align: center;
+            font-size: 18px;
+            color: var(--browser-sub-title-color);
+            width: 100%;
+            font-family: var(--montserrat);
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .browser-success-popup {
+    width: calc(100% - 50px);
+  }
+}

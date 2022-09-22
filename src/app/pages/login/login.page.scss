@@ -1,0 +1,149 @@
+.login-content-container {
+  background-color: var(--login-content-color);
+
+  .login-content-grid {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    display: grid;
+  }
+
+  .login-submit-btn {
+    margin: 8px auto auto;
+
+    &.google-signin-btn {
+      display: none;
+      --background: var(--google-signin-bg-color);
+      --border-radius: 6px;
+      width: 250px;
+      height: 50px;
+      font-weight: 700;
+    }
+
+    &.apple-signin-btn {
+      display: none;
+      --background: var(--apple-signin-bg-color);
+      --background-activated: var(--apple-signin-bg-color);
+      --background-focused: var(--apple-signin-bg-color);
+      --background-hover: var(--apple-signin-bg-color);
+      color: var(--apple-signin-color);
+      border: 1px solid var(--apple-signin-color);
+      min-width: 140pt;
+      min-height: 30pt;
+      border-radius: 6px;
+      text-transform: none;
+      --box-shadow: none;
+      --border-radius: 6px;
+      width: 250px;
+      height: 50px;
+      font-weight: 700;
+    }
+
+    .apple-icon-container,
+    .google-icon-container {
+      display: flex;
+      padding: 0 3px;
+    }
+
+    .apple-signin-text,
+    .google-signin-text {
+      text-align: left;
+      text-transform: none;
+    }
+
+    .icon {
+      width: 44px;
+      height: 44px;
+      background-repeat: no-repeat;
+      background-position: center;
+
+      &.google-icon {
+        background-image: var(--google-icon);
+        background-color: var(--white);
+        border-radius: 6px;
+      }
+
+      &.apple-icon {
+        background-image: var(--apple-icon);
+      }
+    }
+  }
+
+  ion-grid {
+    .logo-img {
+      width: 60px;
+      height: 17px;
+      background-image: var(--gooru-logo);
+      background-position: center;
+      background-size: 100%;
+    }
+
+    .login-form {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+
+      .form-row {
+        .form-grid {
+          .form-password,
+          .form-username {
+            display: flex;
+            flex-direction: column;
+          }
+
+          ::ng-deep nav-input-email .email-label {
+            .input-label {
+              font-size: 14px;
+            }
+          }
+
+          ::ng-deep nav-input-password .email-label {
+            .input-label {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+
+      .forgot-pwd-text {
+        font-size: 14px;
+        color: var(--forgot-pwd-text);
+        font-weight: 700;
+        padding: 14px 0;
+      }
+    }
+
+    .navigator-logo-img {
+      width: 112px;
+      height: 112px;
+      background-image: var(--nav-guardian-logo);
+      background-position: center;
+      background-size: 100%;
+      margin: 14px auto auto;
+      background-repeat: no-repeat;
+    }
+
+    .submit-btn {
+      --background: var(--login-btn-bg-color);
+      color: var(--login-btn-text-color);
+    }
+
+    .button-container {
+      .submit-btn {
+        margin: 8px auto auto;
+      }
+    }
+  }
+
+  .signup-link {
+    color: var(--signin-text);
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    height: 48px;
+    display: flex;
+    align-items: center;
+  }
+}

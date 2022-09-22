@@ -1,0 +1,133 @@
+<ng-container [ngSwitch]="pageType">
+  <form [formGroup]="pageForm" (ngSubmit)="formSubmit()" class="guardian-form" autofill="off">
+    <ng-container *ngSwitchCase="'signup'">
+      <ng-container *ngTemplateOutlet="signupTemplate"></ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="'request-access'">
+      <ng-container *ngTemplateOutlet="requestAccessTemplate"></ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="'signup-request-access'">
+      <ng-container *ngTemplateOutlet="requestAccessTemplate"></ng-container>
+      <ng-container *ngTemplateOutlet="signupTemplate"></ng-container>
+    </ng-container>
+    <ion-row class="justify-content-center" *ngIf="isLoaded">
+      <ion-button class="submit-btn submit" [ngClass]="{'platform-button': isDesktopView}" type="submit">{{ 'SUBMIT' | translate }}</ion-button>
+    </ion-row>
+  </form>
+</ng-container>
+<!-- signup Template -->
+<ng-template #signupTemplate>
+  <ion-row class="justify-content-center guardian-details-header" *ngIf="!isDesktopView">
+    <ion-col align-self-start size="10">
+      <ion-text>{{ 'SIGNUP_HEADER_MSG_FOR_GUARDIAN'| translate }}</ion-text>
+    </ion-col>
+  </ion-row>
+  <ion-row class="justify-content-center name-field">
+    <ion-col align-self-start size="11">
+      <nav-input-text [label]="'FIRST_NAME' | translate" [formName]="'firstName'" [parentForm]="pageForm" [isRequired]="true"></nav-input-text>
+      <ion-text *ngIf="submitted && validateForm.firstName.errors" class="danger-text">
+        {{'ENTER_YOUR_TEXT' | translate}} {{'FIRST_NAME' | translate}}.
+      </ion-text>
+    </ion-col>
+  </ion-row>
+  <ion-row class="justify-content-center name-field">
+    <ion-col align-self-start size="11">
+      <nav-input-text [label]="'LAST_NAME' | translate" [formName]="'lastName'" [parentForm]="pageForm" [isRequired]="true"></nav-input-text>
+      <ion-text *ngIf="submitted && validateForm.lastName.errors" class="danger-text">
+        {{'ENTER_YOUR_TEXT' | translate}} {{'LAST_NAME' | translate}}.
+      </ion-text>
+    </ion-col>
+  </ion-row>
+  <ion-row class="justify-content-center email">
+    <ion-col align-self-start size="11">
+      <nav-input-email [label]="'EMAIL' | translate" [formName]="'email'" [parentForm]="pageForm" [isRequired]="true"></nav-input-email>
+      <ion-text class="email-msg-label">
+        {{'THIS_WILL_BE_YOUR_LOGIN_ID_MSG'| translate}}
+      </ion-text>
+      <ion-text *ngIf="submitted && validateForm.email.errors?.required" class="danger-text text-center">
+        {{'ENTER_YOUR_TEXT' | translate}} {{'EMAIL' | translate}}.
+      </ion-text>
+      <ion-text *ngIf="submitted && validateForm.email.errors?.email" class="danger-text text-center">
+        {{'ENTER_YOUR_TEXT' | translate}} valid {{'EMAIL' | translate}}.
+      </ion-text>
+      <ion-text class="danger-text" *ngIf="submitted && desktopMessage">
+        {{ desktopMessage }}
+      </ion-text>
+    </ion-col>
+  </ion-row>
+  <ion-row class="justify-content-center password">
+    <ion-col align-self-start size="11">
+      <nav-input-password [parentForm]="pageForm" [formName]="'password'" [label]="'PASSWORD' | translate" [isRequired]="true"></nav-input-password>
+      <ion-text *ngIf="submitted && validateForm.password.errors" class="danger-text">
+        {{'ENTER_YOUR_TEXT' | translate}} {{'PASSWORD' | translate}}.
+      </ion-text>
+    </ion-col>
+  </ion-row>
+  <ion-row class="justify-content-center confirm-password">
+    <ion-col align-self-start size="11">
+      <nav-input-password [parentForm]="pageForm" [formName]="'confirmPassword'" [label]="'CONFIRM_PASSWORD' | translate" [isRequired]="true"></nav-input-password>
+      <ion-text *ngIf="submitted && validateForm.confirmPassword.errors" class="danger-text">
+        {{'ENTER_YOUR_TEXT' | translate}} {{'CONFIRM_PASSWORD'| translate}}.
+      </ion-text>
+      <ion-text *ngIf="submitted && checkPassword && !validateForm.confirmPassword.errors" class="danger-text">{{'PASSWORD_NOT_MATCH' | translate}}.</ion-text>
+    </ion-col>
+  </ion-row>
+</ng-template>
+<!-- request access template -->
+<ng-template #requestAccessTemplate>
+  <ion-row class="justify-content-center guardian-details-header">
+    <ion-col align-self-start size="11">
+      <ion-text>{{'SIGNUP_HEADER_MSG_FOR_LEARNER' | translate}}</ion-text>
+    </ion-col>
+  </ion-row>
+  <ion-row class="justify-content-center name-field">
+    <ion-col align-self-start size="11">
+      <nav-input-text [label]="'FIRST_NAME' | translate" [formName]="'wardFirstname'" [parentForm]="pageForm" [isRequired]="true"></nav-input-text>
+      <ion-text *ngIf="submitted && validateForm.wardFirstname.errors" class="danger-text">
+        {{'ENTER_YOUR_TEXT' | translate}} {{'FIRST_NAME' | translate}}.
+      </ion-text>
+    </ion-col>
+  </ion-row>
+  <ion-row class="justify-content-center name-field">
+    <ion-col align-self-start size="11">
+      <nav-input-text [label]="'LAST_NAME' | translate" [formName]="'wardLastname'" [parentForm]="pageForm" [isRequired]="true"></nav-input-text>
+      <ion-text *ngIf="submitted && validateForm.wardLastname.errors" class="danger-text">
+        {{'ENTER_YOUR_TEXT' | translate}} {{'LAST_NAME' | translate}}.
+      </ion-text>
+    </ion-col>
+  </ion-row>
+  <ion-row class="justify-content-center email">
+    <ion-col align-self-start size="11">
+      <nav-input-email [label]="'WARD_EMAIL' | translate" [formName]="'wardEmail'" [parentForm]="pageForm" [isRequired]="true"></nav-input-email>
+      <ion-text class="email-msg-label">
+        {{'THIS_WILL_BE_YOUR_WARD_LOGIN_ID_MSG'| translate}}
+      </ion-text>
+      <ion-text *ngIf="submitted && validateForm.wardEmail.errors?.required" class="danger-text text-center">
+        {{'ENTER_YOUR_TEXT' | translate}} {{'EMAIL' | translate}}.
+      </ion-text>
+      <ion-text *ngIf="submitted && validateForm.wardEmail.errors?.email" class="danger-text text-center">
+        {{'ENTER_YOUR_TEXT' | translate}} valid {{'EMAIL' | translate}}.
+      </ion-text>
+    </ion-col>
+  </ion-row>
+  <ion-row class="justify-content-center role-list-row">
+    <ion-col align-self-start size="11" [formGroup]="pageForm">
+      <ion-grid class="input-wrapper">
+        <ion-row>
+          <ion-label class="input-label select-label">
+            {{ 'SELECT_ROLE' | translate }} *
+          </ion-label>
+        </ion-row>
+        <ion-row>
+          <ion-select formControlName="roles" placeholder="{{'SELECT_ROLE' | translate}}" [interfaceOptions]="customSelectOptions" dropdownScrollIntoView>
+            <ion-select-option [value]="role.id" *ngFor="let role of roleList">{{role.name}}</ion-select-option>
+          </ion-select>
+        </ion-row>
+        <ion-row>
+          <ion-text *ngIf="submitted && validateForm.roles.errors?.required" class="danger-text text-center error-text">{{ 'SELECT_ROLE_ERROR' | translate }}</ion-text>
+        </ion-row>
+      </ion-grid>
+    </ion-col>
+  </ion-row>
+</ng-template>
+<nav-custom-alert *ngIf="showSuccessAlert && !isDesktopView" (dismissAlert)="dismissAlert($event)" [successMessage1]="successMessage"></nav-custom-alert>

@@ -1,0 +1,42 @@
+.header-wrapper {
+  ion-toolbar {
+    --background: var(--ward-request-access-header-background);
+    --min-height: 56px;
+    box-shadow: 0 2px 4px 2px var(--ward-request-access-header-boxshadow);
+    margin-bottom: 10px;
+
+    ion-back-button {
+      min-width: 24px;
+      --padding-start: 0;
+      --padding-end: 0;
+      margin: auto;
+    }
+
+    .col-close {
+      ion-icon {
+        font-size: 24px;
+      }
+    }
+
+    ion-grid {
+      padding: 0;
+
+      .header-title {
+        color: var(--ward-request-header-text-color);
+
+        ion-col {
+          display: flex;
+          align-items: center;
+
+          .sign-up-title-text {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--ward-request-header-text-color);
+            font-weight: 300;
+            font-family: var(--montserrat);
+          }
+        }
+      }
+    }
+  }
+}
