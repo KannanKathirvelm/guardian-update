@@ -85,7 +85,7 @@
     "cordova-support-google-services": "^1.4.0",
     "core-js": "^2.5.4",
     "crypto-js": "^4.1.1",
-    "d3": "^5.15.0",
+    "d3": "^7.6.1",
     "driver.js": "^0.9.8",
     "es6-promise-plugin": "^4.2.2",
     "fs": "0.0.1-security",
